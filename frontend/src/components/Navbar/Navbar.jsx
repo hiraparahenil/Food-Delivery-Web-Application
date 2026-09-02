@@ -6,8 +6,13 @@ import { StoreContext } from '../../context/StoreContext'
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home")
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext)
-  const navigate =useNavigate();
+  // 🔍 search અને setSearch ને Context માંથી લીધા
+  const { getTotalCartAmount, token, setToken, search, setSearch } = useContext(StoreContext)
+  
+  // 🔍 સર્ચ ઇનપુટ બોક્સ બતાવવા/સંતાડવા માટે local state
+  const [showSearch, setShowSearch] = useState(false)
+  
+  const navigate = useNavigate();
   const location = useLocation()
   
   useEffect(() => {
@@ -67,14 +72,31 @@ const Navbar = ({ setShowLogin }) => {
       </ul>
 
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="Search" />
+        {/* 🔍 સર્ચ સેક્શન (Input Box + Search Icon) */}
+        <div className="navbar-search-container">
+          {showSearch && (
+            <input 
+              type="text" 
+              placeholder="Search food..." 
+              value={search} 
+              onChange={(e) => setSearch(e.target.value)} 
+              className="navbar-search-input"
+            />
+          )}
+          <img 
+            src={assets.search_icon} 
+            alt="Search" 
+            onClick={() => setShowSearch(!showSearch)} 
+            style={{ cursor: 'pointer' }}
+          />
+        </div>
+
         <div className="navbar-search-icon">
           <Link to='/cart'><img src={assets.basket_icon} alt="Basket" /></Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
 
         {!token ? (
-          
           <button onClick={() => setShowLogin(true)} className='navbar-btn'>
             Sign in
           </button>

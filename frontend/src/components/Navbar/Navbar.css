@@ -92,8 +92,22 @@
   width: 20px;
 }
 .nav-profile-dropdown li:hover{
-color: tomato;
+  color: tomato;
 }
+.navbar-search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-search-input {
+  padding: 6px 12px;
+  border: 1px solid #ff6347;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+}
+
 @media (max-width:1050px){
   .navbar .logo{
     width: 140px;
