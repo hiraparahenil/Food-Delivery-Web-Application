@@ -5,12 +5,9 @@ dns.setServers(["8.8.8.8"]);
 
 export const connectDB = async () => {
     try {
-        await mongoose.connect(
-            "mongodb+srv://henilhirpara8_db_user:3Jv9bLBFfqt7kwWd@cluster0.xnaewg4.mongodb.net/food-del?retryWrites=true&w=majority"
-        );
-
-        console.log("DB connected");
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("DB Connected Successfully");
     } catch (error) {
-        console.log("DB connection failed:", error.message);
+        console.log("DB Connection Error:", error);
     }
-};
+}
